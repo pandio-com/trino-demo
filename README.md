@@ -18,9 +18,13 @@ Mac OS X / Linux
 
 ## Steps
 
+1. `git clone git@github.com:pandio-com/trino-demo.git && cd ./trino-demo`
+
 1. Open terminal window and run `./run.sh`
 
 1. Open second terminal window and run `./demo.sh`
 
 This will output 10 rows from the random data inserted into each database.
+
+**Note:** To shutdown, exit the first terminal running `./run.sh`
 
