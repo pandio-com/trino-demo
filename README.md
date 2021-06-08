@@ -1,4 +1,6 @@
-# Trino Demonstration
+<a href="https://pandio.com"><img src="https://pandio-com.github.io/static/files/assets/pandio_225_blue-05.svg" alt="Pandio Logo"></a>
+
+# Pandio Trino Demonstration
 
 The purpose of this repository is to give a full demonstration of Trino.
 
