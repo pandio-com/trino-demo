@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  coordinator:
+    image: "lewuathe/trino-coordinator:${trino_VERSION}"
+    ports:
+      - "8080:8080"
+    container_name: "coordinator"
+    command: http://coordinator:8080 coordinator
+    volumes:
+      - ./catalogs:/usr/local/trino/etc/catalog
+  worker0:
+    image: "lewuathe/trino-worker:${trino_VERSION}"
+    container_name: "worker0"
+    ports:
+      - "8081:8081"
+    command: http://coordinator:8080 worker0
+    volumes:
+      - ./catalogs:/usr/local/trino/etc/catalog
+    depends_on:
+      - "coordinator"
+      - "pdb"
+      - "mdb"
+  worker1:
+    image: "lewuathe/trino-worker:${trino_VERSION}"
+    container_name: "worker1"
+    ports:
+      - "8082:8081"
+    command: http://coordinator:8080 worker1
+    volumes:
+      - ./catalogs:/usr/local/trino/etc/catalog
+    depends_on:
+      - "coordinator"
+      - "pdb"
+      - "mdb"
+  pdb:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: dev
+    ports:
+      - "5432:5432"
+  mdb:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: dev
+    ports:
+      - "3306:3306"
+    cap_add:
+      - SYS_NICE
