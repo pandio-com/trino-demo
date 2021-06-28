@@ -2,7 +2,7 @@ version: '3'
 
 services:
   coordinator:
-    image: "lewuathe/trino-coordinator:${trino_VERSION}"
+    image: "lewuathe/trino-coordinator:${TRINO_VERSION}"
     ports:
       - "8080:8080"
     container_name: "coordinator"
@@ -10,7 +10,7 @@ services:
     volumes:
       - ./catalogs:/usr/local/trino/etc/catalog
   worker0:
-    image: "lewuathe/trino-worker:${trino_VERSION}"
+    image: "lewuathe/trino-worker:${TRINO_VERSION}"
     container_name: "worker0"
     ports:
       - "8081:8081"
@@ -22,7 +22,7 @@ services:
       - "pdb"
       - "mdb"
   worker1:
-    image: "lewuathe/trino-worker:${trino_VERSION}"
+    image: "lewuathe/trino-worker:${TRINO_VERSION}"
     container_name: "worker1"
     ports:
       - "8082:8081"
@@ -69,6 +69,10 @@ services:
   #     TRINO_HOST: coordinator
   #     TRINO_PORT: "8080"
   #     LIMIT: "200"
+  #   volumes:
+  #     - type: bind
+  #       source: ./demo.sh
+  #       target: /demo.sh
   #   depends_on:
   #     - "coordinator"
   #     - "pdb"

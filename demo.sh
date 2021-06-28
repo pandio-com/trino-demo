@@ -2,6 +2,8 @@
 
 set -ex
 
+export $(xargs <.env)
+
 python load-data.py
 
 echo "\r"

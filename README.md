@@ -20,7 +20,7 @@ Mac OS X / Linux
 
 1. `git clone git@github.com:pandio-com/trino-demo.git && cd ./trino-demo`
 
-2. Refer `.env.example` for environment variables being used, change the values of those variables if necessary and export those.
+2. Refer `.env.example` for environment variables being used, create .env file from it and change the values of those variables if necessary.
 
 3. Open terminal window and run `./run.sh`
 
@@ -36,10 +36,10 @@ This will output number of rows that we've set in this env variable `LIMIT` from
 
 1. Uncomment `trino-demo` service configuration inside docker-compose.yaml.
 
-2. Run `docker-compose up --build` which will build the trino-demo app.
+2. Open another terminal and run `TRINO_VERSION=354 docker-compose up --build trino-demo` which will build the trino-demo app.
 
-This will output number of rows that we've set in this env variable inside docker-compose.yaml file `LIMIT` from the random data inserted into each database.
+3. Open another terminal inside the same project dir and run `docker exec -it trino-demo_trino-demo_1 bash` which will get you inside the trino-demo app container, where you can modify from the outside from the local and can run execute that changed script inside the trino-demo app container's root dir.
 
 **Note:** To shutdown, exit the first terminal with `Ctrl+C`
 
-**Note:** To remove the stopped containers, run `docker-compose rm -f`
+**Note:** To remove the stopped containers, run `TRINO_VERSION=354 docker-compose rm -f`

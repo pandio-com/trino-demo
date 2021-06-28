@@ -19,4 +19,4 @@ RUN apk update \
 ENV PATH=$PATH:${JAVA_HOME}/bin
 ADD . .
 RUN pip install -r requirements.txt
-CMD ["./demo.sh"]
+CMD ["/bin/bash", "-c", "while true; do sleep 30; done;"]
