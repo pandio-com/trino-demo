@@ -1,1 +1,1 @@
-trino_VERSION=354 docker-compose up
+trino_VERSION=354 docker-compose up -d
