@@ -24,7 +24,7 @@ Mac OS X / Linux
 
 3. Open terminal window and run `./run.sh` which will run coordinator, 2 workers, postgresql and mysql inside docker containers.
 
-4. Run `pip install -r requirements.txt` to install dependencies
+4. Run `pip install -r requirements.txt` to install dependencies.
 
 4. Open second terminal window and run `./demo.sh` which will run load-data.py file to generate some random data inside mysql and postgres db.
 
@@ -34,10 +34,8 @@ This will output number of rows that we've set in this env variable `LIMIT` from
 
 ## For running trino-demo inside container
 
-1. Uncomment `trino-demo` service configuration inside docker-compose.yaml.
+1. Run `TRINO_VERSION=354 docker-compose up -d --build trino-demo` which will build the trino-demo app. Run another command `TRINO_VERSION=354 docker-compose ps` to check all containers are running. You can check the logs of all containers using `TRINO_VERSION=354 docker-compose logs -f`.
 
-2. Open another terminal and run `TRINO_VERSION=354 docker-compose up --build trino-demo` which will build the trino-demo app.
+2. Open another terminal inside the same project dir and run `docker exec -it trino-demo_trino-demo_1 ./demo.sh` which will show you the output of the demo.sh script,where you can modify the demo.sh from the outside from the local and can execute that changed script using the aforementioned command.
 
-3. Open another terminal inside the same project dir and run `docker exec -it trino-demo_trino-demo_1 bash` which will get you inside the trino-demo app container, where you can modify script from the outside from the local and can execute that changed script inside the trino-demo app container's root dir.
-
-**Note:** To stop and remove the running containers, open the terminal in the project root dir, exit the terminal in which you're running `step 2` and hit `Ctrl+C` to stop the running containers and `TRINO_VERSION=354 docker-compose rm` which will give prompt for the confirmation to remove the stopped containers.
+**Note:** To stop and remove the running containers, open the terminal in the project root dir, run `TRINO_VERSION=354 docker-compose stop` which will stop all the containers which were running and further `TRINO_VERSION=354 docker-compose rm` which will give prompt for the confirmation to remove the stopped containers.

@@ -53,29 +53,29 @@ services:
       - "3306:3306"
     cap_add:
       - SYS_NICE
-  # trino-demo:
-  #   build:
-  #     context: .
-  #   environment:
-  #     NUMOFROWS: "350"
-  #     MYSQL_HOST: mdb
-  #     MYSQL_USER: root
-  #     MYSQL_PASSWORD: admin
-  #     MYSQL_DB: dev
-  #     POSTGRES_HOST: pdb
-  #     POSTGRES_DB: dev
-  #     POSTGRES_USER: admin
-  #     POSTGRES_PASSWORD: admin
-  #     TRINO_HOST: coordinator
-  #     TRINO_PORT: "8080"
-  #     LIMIT: "200"
-  #   volumes:
-  #     - type: bind
-  #       source: ./demo.sh
-  #       target: /demo.sh
-  #   depends_on:
-  #     - "coordinator"
-  #     - "pdb"
-  #     - "mdb"
-  #     - "worker0"
-  #     - "worker1"
+  trino-demo:
+    build:
+      context: .
+    environment:
+      NUMOFROWS: "350"
+      MYSQL_HOST: mdb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin
+      MYSQL_DB: dev
+      POSTGRES_HOST: pdb
+      POSTGRES_DB: dev
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      TRINO_HOST: coordinator
+      TRINO_PORT: "8080"
+      LIMIT: "200"
+    volumes:
+      - type: bind
+        source: ./demo.sh
+        target: /demo.sh
+    depends_on:
+      - "coordinator"
+      - "pdb"
+      - "mdb"
+      - "worker0"
+      - "worker1"
