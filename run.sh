@@ -1,1 +1,1 @@
-trino_VERSION=354 docker-compose up -d
+TRINO_VERSION=354 docker-compose --compatibility up --build -d
