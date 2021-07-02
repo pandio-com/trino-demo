@@ -16,6 +16,8 @@ Docker Engine 20+
 
 Mac OS X / Linux
 
+RAM between 4GB to 8GB
+
 ## Steps
 
 1. `git clone git@github.com:pandio-com/trino-demo.git && cd ./trino-demo`
