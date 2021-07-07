@@ -24,7 +24,7 @@ RAM between 4GB to 8GB
 
 2. Refer `.env.example` for environment variables being used, create .env file from it and change the values of those variables if necessary.
 
-3. Open terminal window and run `./run.sh` which will run coordinator, 2 workers, postgresql and mysql inside docker containers.
+3. Open terminal window and run `./run.sh` which will run coordinator, worker, postgresql and mysql inside docker containers.
 
 4. Run `pip install -r requirements.txt` to install dependencies.
 
@@ -36,7 +36,7 @@ This will output number of rows that we've set in this env variable `LIMIT` from
 
 ## For running trino-demo inside container
 
-1. Run `TRINO_VERSION=354 docker-compose up -d --build trino-demo` which will build the trino-demo app. Run another command `TRINO_VERSION=354 docker-compose ps` to check all containers are running. You can check the logs of all containers using `TRINO_VERSION=354 docker-compose logs -f`.
+1. Run `./run.sh` which will build the trino-demo app and will run coordinator, worker, postgresql and mysql inside docker containers. Run another command `TRINO_VERSION=354 docker-compose ps` to check all containers are running. You can check the logs of all containers using `TRINO_VERSION=354 docker-compose logs -f`.
 
 2. Open another terminal inside the same project dir and run `docker exec -it trino-demo_trino-demo_1 ./demo.sh` which will show you the output of the demo.sh script,where you can modify the demo.sh from the outside from the local and can execute that changed script using the aforementioned command.
 
