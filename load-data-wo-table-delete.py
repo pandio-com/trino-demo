@@ -25,13 +25,9 @@ connp = psycopg2.connect(
 curp = connp.cursor()
 curm = connm.cursor()
 
-curm.execute("DROP table IF EXISTS customers")
+curm.execute("CREATE TABLE IF NOT EXISTS customers (id VARCHAR(255), name VARCHAR(255))")
 
-curp.execute("DROP TABLE IF EXISTS customers")
-
-curm.execute("CREATE TABLE customers (id VARCHAR(255), name VARCHAR(255))")
-
-curp.execute("CREATE TABLE customers (id VARCHAR(255), address VARCHAR(255))")
+curp.execute("CREATE TABLE IF NOT EXISTS customers (id VARCHAR(255), address VARCHAR(255))")
 
 namedict = []
 num_of_rows = os.getenv('NUMOFROWS')

@@ -1,4 +1,8 @@
-pip install -r requirements.txt
+#!/bin/sh
+
+set -ex
+
+export $(xargs <.env)
 
 python load-data.py
 
@@ -16,7 +20,7 @@ echo "select * from system.runtime.nodes;"
 
 echo "\r"
 
-./trino.jar --output-format ALIGNED --execute 'select * from system.runtime.nodes;'
+./trino.jar --server ${TRINO_HOST}:${TRINO_PORT} --output-format ALIGNED --execute 'select * from system.runtime.nodes;'
 
 echo "\r"
 
@@ -24,7 +28,7 @@ echo "show catalogs;"
 
 echo "\r"
 
-./trino.jar --output-format ALIGNED --execute 'show catalogs;'
+./trino.jar --server ${TRINO_HOST}:${TRINO_PORT} --output-format ALIGNED --execute 'show catalogs;'
 
 echo "\r"
 
@@ -32,7 +36,7 @@ echo "show schemas in mysql;"
 
 echo "\r"
 
-./trino.jar --output-format ALIGNED --execute 'show schemas in mysql;'
+./trino.jar --server ${TRINO_HOST}:${TRINO_PORT} --output-format ALIGNED --execute 'show schemas in mysql;'
 
 echo "\r"
 
@@ -40,7 +44,7 @@ echo "show schemas in postgres;"
 
 echo "\r"
 
-./trino.jar --output-format ALIGNED --execute 'show schemas in postgres;'
+./trino.jar --server ${TRINO_HOST}:${TRINO_PORT} --output-format ALIGNED --execute 'show schemas in postgres;'
 
 echo "\r"
 
@@ -48,7 +52,7 @@ echo "describe mysql.dev.customers;"
 
 echo "\r"
 
-./trino.jar --output-format ALIGNED --execute 'describe mysql.dev.customers;;'
+./trino.jar --server ${TRINO_HOST}:${TRINO_PORT} --output-format ALIGNED --execute 'describe mysql.dev.customers;;'
 
 echo "\r"
 
@@ -56,12 +60,12 @@ echo "describe postgres.public.customers;"
 
 echo "\r"
 
-./trino.jar --output-format ALIGNED --execute 'describe postgres.public.customers;'
+./trino.jar --server ${TRINO_HOST}:${TRINO_PORT} --output-format ALIGNED --execute 'describe postgres.public.customers;'
 
 echo "\r"
 
-echo "select mysql.dev.customers.*, postgres.public.customers.* from mysql.dev.customers join postgres.public.customers on postgres.public.customers.id = mysql.dev.customers.id LIMIT 10;"
+echo "select mysql.dev.customers.*, postgres.public.customers.* from mysql.dev.customers join postgres.public.customers on postgres.public.customers.id = mysql.dev.customers.id LIMIT ${LIMIT};"
 
 echo "\r"
 
-./trino.jar --output-format ALIGNED --execute 'select mysql.dev.customers.*, postgres.public.customers.* from mysql.dev.customers join postgres.public.customers on postgres.public.customers.id = mysql.dev.customers.id LIMIT 10;'
+./trino.jar --server ${TRINO_HOST}:${TRINO_PORT} --output-format ALIGNED --execute 'select mysql.dev.customers.*, postgres.public.customers.* from mysql.dev.customers join postgres.public.customers on postgres.public.customers.id = mysql.dev.customers.id LIMIT '"$LIMIT"';'
